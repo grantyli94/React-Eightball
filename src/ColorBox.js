@@ -9,19 +9,17 @@ function ColorBox(props) {
     let idx = Math.floor(Math.random() * colors.length);
     return colors[idx];
   }
-  
+
   return (
     <div className="ColorBox">
-      <div className="ColorBox-Box" style={{backgroundColor: color}}></div>
+      <div className="ColorBox-Box" style={{ backgroundColor: color }}></div>
       <button onClick={() => setColor(getRandomColor)}>Change</button>
     </div>
-  )
+  );
 }
 
 ColorBox.defaultProps = {
-  colors: [
-    "red", "green", "purple", "blue"
-  ]
-}
+  colors: ["red", "green", "purple", "blue"],
+};
 
-export default ColorBox
+export default ColorBox;

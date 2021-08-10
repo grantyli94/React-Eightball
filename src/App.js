@@ -1,11 +1,11 @@
-import EightBall from './EightBall';
-import ColorBox from './ColorBox';
+import EightBall from "./EightBall";
+import ColorBoxes from "./ColorBoxes";
 
 function App() {
   return (
     <div className="App">
       <EightBall />
-      <ColorBox />
+      <ColorBoxes />
     </div>
   );
 }

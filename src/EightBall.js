@@ -1,19 +1,68 @@
-import './EightBall.css';
+import "./EightBall.css";
 import { useState } from "react";
+
+/** EightBall
+ *
+ * Props:
+ * - answers (array of objects with the keys of msg and color)
+ *
+ * State:
+ * - msg
+ * - color
+ *
+ * App -> EightBall
+ */
 
 function EightBall(props) {
   const [msg, setMsg] = useState("Think of a Question");
   const [color, setColor] = useState("black");
+  const [greenCount, setGreenCount] = useState(0);
+  const [redCount, setRedCount] = useState(0);
+  const [goldCount, setGoldCount] = useState(0);
 
   function msgAndColorHandler(answers) {
-    let answer = answers[0];
+    let idx = Math.floor(Math.random() * answers.length);
+    let answer = answers[idx];
     setMsg(answer.msg);
     setColor(answer.color);
+    updateCount(answer.color);
   }
-  
+
+  function updateCount(color) {
+    if (color === "green") {
+      setGreenCount(greenCount + 1);
+    } else if (color === "red") {
+      setRedCount(redCount + 1);
+    } else if (color === "goldenrod") {
+      setGoldCount(goldCount + 1);
+    }
+  }
+
+  function resetHandler() {
+    setMsg("Think of a Question");
+    setColor("black");
+    setGreenCount(0);
+    setGoldCount(0);
+    setRedCount(0);
+  }
+
   return (
-    <div className="EightBall" onClick={() => msgAndColorHandler(props.answers)} style={{ backgroundColor: color }}>
-      { msg }
+    <div className="EightBall">
+      <div
+        className="EightBall-ball"
+        onClick={() => msgAndColorHandler(props.answers)}
+        style={{ backgroundColor: color }}
+      >
+        {msg}
+      </div>
+      <button onClick={resetHandler}>Reset</button>
+      <div>
+        <ul>
+          <li>Green count: {greenCount}</li>
+          <li>Red count: {redCount}</li>
+          <li>Gold count: {goldCount}</li>
+        </ul>
+      </div>
     </div>
   );
 }
@@ -40,7 +89,7 @@ EightBall.defaultProps = {
     { msg: "My sources say no.", color: "red" },
     { msg: "Outlook not so good.", color: "red" },
     { msg: "Very doubtful.", color: "red" },
-  ]
-}
+  ],
+};
 
-export default EightBall
+export default EightBall;
